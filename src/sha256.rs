@@ -1,3 +1,7 @@
+#![allow(clippy::unreadable_literal)]
+
+// Constants are reproduced in their standard hexadecimal SHA-256 form so they
+// can be checked against the algorithm specification and known test vectors.
 const INITIAL: [u32; 8] = [
     0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab,
     0x5be0cd19,
@@ -18,67 +22,36 @@ pub fn digest(input: &[u8]) -> [u8; 32] {
     let bit_len = (input.len() as u64).wrapping_mul(8);
     let mut data = input.to_vec();
     data.push(0x80);
-    while data.len() % 64 != 56 {
-        data.push(0);
-    }
+    while data.len() % 64 != 56 { data.push(0); }
     data.extend_from_slice(&bit_len.to_be_bytes());
     let mut hash = INITIAL;
     for chunk in data.chunks_exact(64) {
         let mut words = [0_u32; 64];
         for (index, word) in words.iter_mut().take(16).enumerate() {
             let offset = index * 4;
-            *word = u32::from_be_bytes([
-                chunk[offset],
-                chunk[offset + 1],
-                chunk[offset + 2],
-                chunk[offset + 3],
-            ]);
+            *word = u32::from_be_bytes([chunk[offset], chunk[offset + 1], chunk[offset + 2], chunk[offset + 3]]);
         }
         for index in 16..64 {
-            let s0 = words[index - 15].rotate_right(7)
-                ^ words[index - 15].rotate_right(18)
-                ^ (words[index - 15] >> 3);
-            let s1 = words[index - 2].rotate_right(17)
-                ^ words[index - 2].rotate_right(19)
-                ^ (words[index - 2] >> 10);
-            words[index] = words[index - 16]
-                .wrapping_add(s0)
-                .wrapping_add(words[index - 7])
-                .wrapping_add(s1);
+            let s0 = words[index - 15].rotate_right(7) ^ words[index - 15].rotate_right(18) ^ (words[index - 15] >> 3);
+            let s1 = words[index - 2].rotate_right(17) ^ words[index - 2].rotate_right(19) ^ (words[index - 2] >> 10);
+            words[index] = words[index - 16].wrapping_add(s0).wrapping_add(words[index - 7]).wrapping_add(s1);
         }
         let [mut a, mut b, mut c, mut d, mut e, mut f, mut g, mut h] = hash;
         for index in 0..64 {
             let s1 = e.rotate_right(6) ^ e.rotate_right(11) ^ e.rotate_right(25);
             let choice = (e & f) ^ ((!e) & g);
-            let temp1 = h
-                .wrapping_add(s1)
-                .wrapping_add(choice)
-                .wrapping_add(K[index])
-                .wrapping_add(words[index]);
+            let temp1 = h.wrapping_add(s1).wrapping_add(choice).wrapping_add(K[index]).wrapping_add(words[index]);
             let s0 = a.rotate_right(2) ^ a.rotate_right(13) ^ a.rotate_right(22);
             let majority = (a & b) ^ (a & c) ^ (b & c);
             let temp2 = s0.wrapping_add(majority);
-            h = g;
-            g = f;
-            f = e;
-            e = d.wrapping_add(temp1);
-            d = c;
-            c = b;
-            b = a;
-            a = temp1.wrapping_add(temp2);
+            h = g; g = f; f = e; e = d.wrapping_add(temp1); d = c; c = b; b = a; a = temp1.wrapping_add(temp2);
         }
-        for (target, value) in hash.iter_mut().zip([a, b, c, d, e, f, g, h]) {
-            *target = target.wrapping_add(value);
-        }
+        for (target, value) in hash.iter_mut().zip([a, b, c, d, e, f, g, h]) { *target = target.wrapping_add(value); }
     }
     let mut output = [0_u8; 32];
-    for (index, word) in hash.iter().enumerate() {
-        output[index * 4..index * 4 + 4].copy_from_slice(&word.to_be_bytes());
-    }
+    for (index, word) in hash.iter().enumerate() { output[index * 4..index * 4 + 4].copy_from_slice(&word.to_be_bytes()); }
     output
 }
 
 #[must_use]
-pub fn hex(input: &[u8]) -> String {
-    digest(input).iter().map(|byte| format!("{byte:02x}")).collect()
-}
+pub fn hex(input: &[u8]) -> String { digest(input).iter().map(|byte| format!("{byte:02x}")).collect() }
