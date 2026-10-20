@@ -1,0 +1,27 @@
+name: ci
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Toolchain
+        run: rustc --version && cargo --version && cargo clippy --version
+      - name: Metadata
+        run: cargo metadata --locked --no-deps > /dev/null
+      - name: Clippy
+        shell: bash
+        run: |
+          if ! cargo clippy --all-targets --all-features -- -D warnings > clippy.log 2>&1; then
+            grep -E "^(error|warning):" clippy.log | head -50 | while IFS= read -r line; do echo "::error::$line"; done
+            cat clippy.log
+            exit 1
+          fi
+      - name: Tests
+        run: cargo test --all-targets --locked
+      - name: Release build
+        run: cargo build --release --locked
+      - name: Demo
+        run: cargo run --release --locked -- --policy policies/host.policy --trace traces/demo.trace

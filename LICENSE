@@ -1,21 +1,28 @@
-MIT License
+PROPRIETARY COMMERCIAL LICENSE
+Effective date: 20 October 2026
 
-Copyright (c) 2026 nrbexpleon
+Copyright (c) 2026 Nagaraj R Bhagwat and/or Expleo Group, as applicable.
+All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. PROSPECTIVE APPLICATION
+This license applies to this version and later versions first published under these terms. It does not revoke or alter rights validly granted for earlier versions under a prior license.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+2. LIMITED EVALUATION RIGHT
+You may inspect and evaluate this source code internally and on non-production systems solely to decide whether to obtain a commercial license. You may not distribute, sublicense, publish, sell or provide the software or derivatives to any third party.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+3. COMMERCIAL, PRODUCTION AND FIELD USE PROHIBITED
+Without a separate written commercial license signed by an authorized rights holder, you may not use, copy, modify, integrate, deploy, distribute, sublicense, sell or otherwise exploit this software or derivatives for production, operational, field, vehicle, embedded, customer, safety/security-related, revenue-generating or commercial use.
+
+4. COMMERCIAL AGREEMENT AND ROYALTIES
+Permitted commercial, production or field use requires a separate written agreement. Fees, royalties, reporting, audit rights, support, warranties and liability exist only if expressly stated in that agreement.
+
+5. NO IMPLIED RIGHTS
+No patent, trademark, trade-secret, copyright or other intellectual-property license is granted except the limited evaluation right.
+
+6. DISCLAIMER
+THE SOFTWARE IS PROVIDED FOR EVALUATION "AS IS", WITHOUT WARRANTY OF ANY KIND. TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE RIGHTS HOLDERS ARE NOT LIABLE FOR CLAIMS OR DAMAGES ARISING FROM THE SOFTWARE OR ITS USE.
+
+7. CONTACT
+Email: nagaraj.rbhagwat@expleogroup.com or an authorized Expleo Group representative.
+
+This is proprietary source-available software and is not open-source software.

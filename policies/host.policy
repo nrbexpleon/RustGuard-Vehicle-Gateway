@@ -1,0 +1,14 @@
+# RustGuard policy language 1.0
+version 1.0
+default drop
+
+# protocol name action interface selectors/limits max_hz
+can vehicle-speed allow can0 0x100 0x7ff 8 100
+can battery-status audit can0 0x200 0x7ff 8 20
+can blocked-control quarantine can0 0x300 0x7ff 8 10
+someip vehicle-state allow eth0 0x1234 0x0001 1024 50
+someip update-status audit eth0 0x4321 0x0002 4096 10
+uds read-data allow diag0 0x22 0x01 technician 20
+uds tester-present allow diag0 0x3e 0x01 * 10
+uds block-programming drop diag0 0x34 0x02 * 1
+uds block-write drop diag0 0x2e 0x01 * 1
