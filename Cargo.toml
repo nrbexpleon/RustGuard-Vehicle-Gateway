@@ -1,0 +1,29 @@
+[package]
+name = "rustguard-vehicle-gateway"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+publish = false
+license = "LicenseRef-Proprietary"
+description = "Memory-safe automotive communication policy gateway and replay lab"
+
+[lib]
+name = "rustguard"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rustguard-gateway"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+all = "deny"
+pedantic = "warn"
