@@ -12,7 +12,13 @@ jobs:
       - name: Metadata
         run: cargo metadata --locked --no-deps > /dev/null
       - name: Clippy
-        run: cargo clippy --all-targets --all-features -- -D warnings
+        shell: bash
+        run: |
+          if ! cargo clippy --all-targets --all-features -- -D warnings > clippy.log 2>&1; then
+            grep -E "^(error|warning):" clippy.log | head -50 | while IFS= read -r line; do echo "::error::$line"; done
+            cat clippy.log
+            exit 1
+          fi
       - name: Tests
         run: cargo test --all-targets --locked
       - name: Release build
