@@ -1,0 +1,10 @@
+# timestamp_us protocol interface protocol-fields payload_hex
+0 can can0 0x100 standard classic 002a
+1000 can can0 0x200 standard classic 4e
+2000 can can0 0x777 standard classic 01
+3000 can can0 0x300 standard classic dead
+4000 someip eth0 0x1234 0x0001 1 1 0x00 5245414459
+5000 someip eth0 0x9999 0x0001 1 1 0x00 00
+6000 uds diag0 0x22 - 0x01 technician f190
+7000 uds diag0 0x34 0x00 0x02 technician 00
+8000 uds diag0 0x2e 0x00 0x01 technician f19001
