@@ -1,0 +1,13 @@
+/target/
+.env
+.env.*
+!.env.example
+artifacts/
+captures/
+policies/private/
+*.pcap
+*.pcapng
+*.pem
+*.key
+*.log
+.DS_Store

@@ -1,0 +1,21 @@
+name: ci
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Toolchain
+        run: rustc --version && cargo --version && cargo clippy --version
+      - name: Metadata
+        run: cargo metadata --locked --no-deps > /dev/null
+      - name: Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+      - name: Tests
+        run: cargo test --all-targets --locked
+      - name: Release build
+        run: cargo build --release --locked
+      - name: Demo
+        run: cargo run --release --locked -- --policy policies/host.policy --trace traces/demo.trace
